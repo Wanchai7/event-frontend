@@ -27,7 +27,7 @@ const MyServices = () => {
     try {
       setLoading(true);
       const response = await fetch(
-        `http://localhost:5000/api/v1/services/owner/${userId}`,
+        `${import.meta.env.VITE_API_URL}/api/v1/services/owner/${userId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -57,7 +57,7 @@ const MyServices = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/v1/services/${serviceId}`,
+        `${import.meta.env.VITE_API_URL}/api/v1/services/${serviceId}`,
         {
           method: "DELETE",
           headers: {

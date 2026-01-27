@@ -27,7 +27,7 @@ const MyServiceBookings = () => {
     try {
       setLoading(true);
       const response = await fetch(
-        `http://localhost:5000/api/v1/bookings/my-services`,
+        `${import.meta.env.VITE_API_URL}/api/v1/bookings/my-services`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -58,7 +58,7 @@ const MyServiceBookings = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/v1/bookings/${bookingId}/approve`,
+        `${import.meta.env.VITE_API_URL}/api/v1/bookings/${bookingId}/approve`,
         {
           method: "PUT",
           headers: {
@@ -88,7 +88,7 @@ const MyServiceBookings = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/v1/bookings/${bookingId}/reject`,
+        `${import.meta.env.VITE_API_URL}/api/v1/bookings/${bookingId}/reject`,
         {
           method: "PUT",
           headers: {

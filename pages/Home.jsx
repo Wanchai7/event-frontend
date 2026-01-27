@@ -29,7 +29,7 @@ const Home = () => {
     try {
       setLoading(true);
       const response = await fetch(
-        "http://localhost:5000/api/v1/services"
+        `${import.meta.env.VITE_API_URL}/api/v1/services`
       );
       if (!response.ok) {
         throw new Error("ไม่สามารถโหลดบริการได้");

@@ -55,7 +55,7 @@ const Login = () => {
       setLoading(true);
       showLoading("กำลังเข้าสู่ระบบ...");
       const response = await fetch(
-        "http://localhost:5000/api/v1/user/login",
+        `${import.meta.env.VITE_API_URL}/api/v1/user/login`,
         {
           method: "POST",
           headers: {

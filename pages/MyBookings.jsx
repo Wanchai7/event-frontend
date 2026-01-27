@@ -26,7 +26,7 @@ const MyBookings = () => {
     try {
       setLoading(true);
       const response = await fetch(
-        `http://localhost:5000/api/v1/bookings/user/${userId}`,
+        `${import.meta.env.VITE_API_URL}/api/v1/bookings/user/${userId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -56,7 +56,7 @@ const MyBookings = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/v1/bookings/${bookingId}`,
+        `${import.meta.env.VITE_API_URL}/api/v1/bookings/${bookingId}`,
         {
           method: "DELETE",
           headers: {

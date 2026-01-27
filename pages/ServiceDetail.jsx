@@ -24,7 +24,7 @@ const ServiceDetail = () => {
     try {
       setLoading(true);
       const response = await fetch(
-        `http://localhost:5000/api/v1/services/${id}`
+        `${import.meta.env.VITE_API_URL}/api/v1/services/${id}`
       );
       if (!response.ok) {
         throw new Error("Failed to fetch service");
@@ -46,7 +46,7 @@ const ServiceDetail = () => {
     try {
       showLoading("กำลังสร้างการจอง...");
       const response = await fetch(
-        "http://localhost:5000/api/v1/bookings",
+        `${import.meta.env.VITE_API_URL}/api/v1/bookings`,
         {
           method: "POST",
           headers: {

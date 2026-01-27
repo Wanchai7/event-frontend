@@ -60,7 +60,7 @@ const Register = () => {
       setLoading(true);
       showLoading("กำลังสร้างบัญชี...");
       const response = await fetch(
-        "http://localhost:5000/api/v1/user/register",
+        `${import.meta.env.VITE_API_URL}/api/v1/user/register`,
         {
           method: "POST",
           headers: {

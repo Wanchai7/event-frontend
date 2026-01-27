@@ -47,7 +47,7 @@ const CreateService = () => {
     try {
       setLoading(true);
       const response = await fetch(
-        `http://localhost:5000/api/v1/services/${id}`
+        `${import.meta.env.VITE_API_URL}/api/v1/services/${id}`
       );
 
       if (!response.ok) {
@@ -158,8 +158,8 @@ const CreateService = () => {
       }
 
       const url = isEditMode
-        ? `http://localhost:5000/api/v1/services/${id}`
-        : "http://localhost:5000/api/v1/services";
+        ? `${import.meta.env.VITE_API_URL}/api/v1/services/${id}`
+        : `${import.meta.env.VITE_API_URL}/api/v1/services`;
       
       const method = isEditMode ? "PUT" : "POST";
 
