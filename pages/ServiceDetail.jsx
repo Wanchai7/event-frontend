@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { showSuccess, showError, showLoading, closeAlert } from "../utils/alert";
+import { showSuccess, showError, showLoading, closeAlert, showWarning } from "../utils/alert";
 import BookingForm from "../components/BookingForm";
 import Card from "../components/Card";
 
@@ -39,7 +39,8 @@ const ServiceDetail = () => {
   };
   const handleBooking = async (formData) => {
     if (!token) {
-      navigate("/login");
+      showWarning("กรุณาเข้าสู่ระบบ", "คุณจำเป็นต้องเข้าสู่ระบบก่อนทำการจอง");
+      setTimeout(() => navigate("/login"), 1500);
       return;
     }
 

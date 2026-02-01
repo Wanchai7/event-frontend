@@ -2,7 +2,9 @@
 import React, { useEffect, useState } from "react";
 import ServiceCard from "../components/ServiceCard";
 import Button from "../components/Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import { showWarning } from "../utils/alert";
 
 const Home = () => {
   const [services, setServices] = useState([]);
@@ -11,6 +13,9 @@ const Home = () => {
   const [filteredServices, setFilteredServices] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
+
+  const { auth } = useAuth();
+  const navigate = useNavigate();
 
   const categories = [
     "all",
@@ -41,6 +46,19 @@ const Home = () => {
       setError(err.message);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleGetStarted = () => {
+    if (!auth.token) {
+      showWarning("กรุณาเข้าสู่ระบบ", "คุณจำเป็นต้องเข้าสู่ระบบเพื่อเริ่มใช้งาน");
+      setTimeout(() => navigate("/login"), 1500);
+    } else {
+      // ถ้าเข้าสู่ระบบแล้ว ให้เลื่อนลงไปดูรายการบริการ
+      const element = document.getElementById("services-section");
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
     }
   };
 
@@ -81,16 +99,14 @@ const Home = () => {
           <p className="text-xl mb-8">
             เช่าอุปกรณ์ที่ดีที่สุดสำหรับงานอีเวนต์ของคุณ
           </p>
-          <Link to="/register">
-            <Button variant="success" size="lg">
-              เริ่มต้นเลย
-            </Button>
-          </Link>
+          <Button variant="success" size="lg" onClick={handleGetStarted}>
+            เริ่มต้นเลย
+          </Button>
         </div>
       </div>
 
       {/* Search and Filter */}
-      <div className="max-w-6xl mx-auto px-4 py-8">
+      <div id="services-section" className="max-w-6xl mx-auto px-4 py-8">
         <div className="mb-8">
           <input
             type="text"
@@ -107,11 +123,10 @@ const Home = () => {
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`px-4 py-2 rounded-lg font-semibold transition ${
-                selectedCategory === cat
-                  ? "bg-blue-600 text-white"
-                  : "bg-white text-blue-600 border-2 border-blue-600 hover:bg-blue-50"
-              }`}
+              className={`px-4 py-2 rounded-lg font-semibold transition ${selectedCategory === cat
+                ? "bg-blue-600 text-white"
+                : "bg-white text-blue-600 border-2 border-blue-600 hover:bg-blue-50"
+                }`}
             >
               {cat}
             </button>
